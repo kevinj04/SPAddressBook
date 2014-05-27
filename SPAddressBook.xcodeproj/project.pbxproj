@@ -22,6 +22,7 @@
 		0AA2DB911934291E0087D1D7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA2DB751934291E0087D1D7 /* CoreData.framework */; };
 		0AA2DB991934291E0087D1D7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AA2DB971934291E0087D1D7 /* InfoPlist.strings */; };
 		0AA2DB9B1934291E0087D1D7 /* SPAddressBookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2DB9A1934291E0087D1D7 /* SPAddressBookTests.m */; };
+		0AA2DBA7193429E90087D1D7 /* SPAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2DBA6193429E90087D1D7 /* SPAddressBook.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		0AA2DB961934291E0087D1D7 /* SPAddressBookTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SPAddressBookTests-Info.plist"; sourceTree = "<group>"; };
 		0AA2DB981934291E0087D1D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0AA2DB9A1934291E0087D1D7 /* SPAddressBookTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPAddressBookTests.m; sourceTree = "<group>"; };
+		0AA2DBA5193429E90087D1D7 /* SPAddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAddressBook.h; sourceTree = "<group>"; };
+		0AA2DBA6193429E90087D1D7 /* SPAddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAddressBook.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,7 @@
 		0AA2DB771934291E0087D1D7 /* SPAddressBook */ = {
 			isa = PBXGroup;
 			children = (
+				0AA2DBA4193429590087D1D7 /* Classes */,
 				0AA2DB801934291E0087D1D7 /* SPAppDelegate.h */,
 				0AA2DB811934291E0087D1D7 /* SPAppDelegate.m */,
 				0AA2DB861934291E0087D1D7 /* Images.xcassets */,
@@ -151,6 +155,15 @@
 				0AA2DB971934291E0087D1D7 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0AA2DBA4193429590087D1D7 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				0AA2DBA5193429E90087D1D7 /* SPAddressBook.h */,
+				0AA2DBA6193429E90087D1D7 /* SPAddressBook.m */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +264,7 @@
 			files = (
 				0AA2DB7E1934291E0087D1D7 /* main.m in Sources */,
 				0AA2DB821934291E0087D1D7 /* SPAppDelegate.m in Sources */,
+				0AA2DBA7193429E90087D1D7 /* SPAddressBook.m in Sources */,
 				0AA2DB851934291E0087D1D7 /* SPAddressBook.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,6 +385,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SPAddressBook/SPAddressBook-Prefix.pch";
 				INFOPLIST_FILE = "SPAddressBook/SPAddressBook-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -384,6 +399,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SPAddressBook/SPAddressBook-Prefix.pch";
 				INFOPLIST_FILE = "SPAddressBook/SPAddressBook-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
