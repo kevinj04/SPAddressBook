@@ -23,6 +23,8 @@
 		0AA2DB991934291E0087D1D7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AA2DB971934291E0087D1D7 /* InfoPlist.strings */; };
 		0AA2DB9B1934291E0087D1D7 /* SPAddressBookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2DB9A1934291E0087D1D7 /* SPAddressBookTests.m */; };
 		0AA2DBA7193429E90087D1D7 /* SPAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2DBA6193429E90087D1D7 /* SPAddressBook.m */; };
+		0AA2DBAE193441A80087D1D7 /* SPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2DBAC193441A80087D1D7 /* SPViewController.m */; };
+		0AA2DBAF193441A80087D1D7 /* SPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA2DBAD193441A80087D1D7 /* SPViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,9 @@
 		0AA2DB9A1934291E0087D1D7 /* SPAddressBookTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPAddressBookTests.m; sourceTree = "<group>"; };
 		0AA2DBA5193429E90087D1D7 /* SPAddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAddressBook.h; sourceTree = "<group>"; };
 		0AA2DBA6193429E90087D1D7 /* SPAddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAddressBook.m; sourceTree = "<group>"; };
+		0AA2DBAB193441A80087D1D7 /* SPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPViewController.h; sourceTree = "<group>"; };
+		0AA2DBAC193441A80087D1D7 /* SPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPViewController.m; sourceTree = "<group>"; };
+		0AA2DBAD193441A80087D1D7 /* SPViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +129,9 @@
 				0AA2DB861934291E0087D1D7 /* Images.xcassets */,
 				0AA2DB831934291E0087D1D7 /* SPAddressBook.xcdatamodeld */,
 				0AA2DB781934291E0087D1D7 /* Supporting Files */,
+				0AA2DBAB193441A80087D1D7 /* SPViewController.h */,
+				0AA2DBAC193441A80087D1D7 /* SPViewController.m */,
+				0AA2DBAD193441A80087D1D7 /* SPViewController.xib */,
 			);
 			path = SPAddressBook;
 			sourceTree = "<group>";
@@ -243,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AA2DB7C1934291E0087D1D7 /* InfoPlist.strings in Resources */,
+				0AA2DBAF193441A80087D1D7 /* SPViewController.xib in Resources */,
 				0AA2DB871934291E0087D1D7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +274,7 @@
 				0AA2DB7E1934291E0087D1D7 /* main.m in Sources */,
 				0AA2DB821934291E0087D1D7 /* SPAppDelegate.m in Sources */,
 				0AA2DBA7193429E90087D1D7 /* SPAddressBook.m in Sources */,
+				0AA2DBAE193441A80087D1D7 /* SPViewController.m in Sources */,
 				0AA2DB851934291E0087D1D7 /* SPAddressBook.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,6 +474,7 @@
 				0AA2DBA01934291E0087D1D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0AA2DBA11934291E0087D1D7 /* Build configuration list for PBXNativeTarget "SPAddressBookTests" */ = {
 			isa = XCConfigurationList;
@@ -472,6 +483,7 @@
 				0AA2DBA31934291E0087D1D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

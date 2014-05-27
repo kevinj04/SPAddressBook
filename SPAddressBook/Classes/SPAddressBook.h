@@ -22,8 +22,9 @@ typedef enum SPAddressBookAccess {
 
 + (SPAddressBookAccess)access;
 
-- (void)loadContacts:(void (^)(NSArray *contacts, NSError *error))callback;
-- (void)loadContactsOnQueue:(dispatch_queue_t)queue
-                 completion:(void (^)(NSArray *contacts, NSError *error))completionBlock;
+- (void)snapShotContacts:(void (^)(NSData *contactData, NSError *error))callback;
+- (void)snapShotContactsOnQueue:(dispatch_queue_t)queue
+                 completion:(void (^)(NSData *contactData, NSError *error))completionBlock;
+- (void)replaceContactsWithData:(NSData *)contactData completion:(void (^)(NSError *error))completionBlock;
 
 @end

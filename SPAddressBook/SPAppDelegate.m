@@ -7,6 +7,7 @@
 //
 
 #import "SPAppDelegate.h"
+#import "SPViewController.h"
 
 @implementation SPAppDelegate
 
@@ -18,7 +19,8 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+
+    [self.window setRootViewController:[SPViewController new]];
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -56,42 +56,113 @@
 }
 
 #pragma mark - Contact Loading
-- (void)loadContacts:(void (^)(NSArray *contacts, NSError *error))callback {
+- (void)snapShotContacts:(void (^)(NSData *contactData, NSError *error))callback {
 
-    [self loadContactsOnQueue:dispatch_get_main_queue() completion:callback];
+    [self snapShotContactsOnQueue:dispatch_get_main_queue() completion:callback];
 }
 
-- (void)loadContactsOnQueue:(dispatch_queue_t)queue
-                 completion:(void (^)(NSArray *contacts, NSError *error))completionBlock {
+- (void)snapShotContactsOnQueue:(dispatch_queue_t)queue
+                     completion:(void (^)(NSData *, NSError *))completionBlock {
 
     ABAddressBookRequestAccessWithCompletion(self.addressBook, ^(bool granted, CFErrorRef errorRef) {
 
-        NSError *error = (__bridge_transfer NSError *)errorRef;
-        NSArray *contacts;
+        NSData *contactData = nil;
+        NSError *error      = (__bridge_transfer NSError *)errorRef;
 
-        if (granted) { contacts = [self allContactsFromAddressBook]; }
+        if (granted) { contactData = [self allContactData]; }
 
         dispatch_async(queue, ^{
-            if (completionBlock) { completionBlock(contacts, error); }
+            if (completionBlock) { completionBlock(contactData, error); }
         });
     });
 }
 
+- (void)replaceContactsWithData:(NSData *)contactData completion:(void (^)(NSError *error))completionBlock {
+
+    ABAddressBookRequestAccessWithCompletion(self.addressBook, ^(bool granted, CFErrorRef error) {
+
+        BOOL success = granted;
+
+        if (granted) {
+
+            success = [self deleteAllContacts];
+            success = success && [self loadContactsFromData:contactData];
+            success = success && [self save];
+        }
+
+        NSError *newError = !success ? [NSError errorWithDomain:@"Replace Error" code:1001 userInfo:@{}] : (__bridge NSError *)error;
+
+        if (completionBlock) {
+            completionBlock(newError);
+        }
+    });
+}
+
 #pragma mark - Helpers
-- (NSArray *)allContactsFromAddressBook {
+- (NSData *)allContactData {
 
     CFArrayRef peopleArrayRef   = ABAddressBookCopyArrayOfAllPeople(self.addressBook);
-    NSUInteger peopleCount      = (NSUInteger)CFArrayGetCount(peopleArrayRef);
-    NSMutableArray *contacts    = [NSMutableArray arrayWithCapacity:peopleCount];
+    return (__bridge_transfer NSData *)ABPersonCreateVCardRepresentationWithPeople(peopleArrayRef);
 
-    for (NSUInteger index = 1; index < peopleCount; index++) {
+}
 
-        ABRecordRef recordRef = CFArrayGetValueAtIndex(peopleArrayRef, index);
-        // create record object here
+- (BOOL)deleteAllContacts {
 
+    CFArrayRef peopleArrayRef   = ABAddressBookCopyArrayOfAllPeople(self.addressBook);
+    NSUInteger peopleCount      = CFArrayGetCount(peopleArrayRef);
+
+    for (NSUInteger index = 0; index < peopleCount; index++) {
+
+        NSError  *error     = nil;
+        ABRecordRef record  = CFArrayGetValueAtIndex(peopleArrayRef, index);
+
+        CFErrorRef cfError = NULL;
+        ABAddressBookRemoveRecord(self.addressBook, record, &cfError);
+
+
+        if (cfError) {
+            error = (__bridge NSError *)(cfError);
+            NSLog(@"Deletion Error: %@", [error localizedDescription]);
+            return NO;
+        }
     }
 
-    return [NSArray arrayWithArray:contacts];
+    return YES;
+}
+
+- (BOOL)loadContactsFromData:(NSData *)contactData {
+
+    CFArrayRef peopleArrayRef   = ABPersonCreatePeopleInSourceWithVCardRepresentation(NULL, (__bridge CFDataRef)contactData);
+    NSUInteger peopleCount      = CFArrayGetCount(peopleArrayRef);
+
+    for (NSUInteger index = 0; index < peopleCount; index++) {
+
+        NSError  *error     = nil;
+        CFErrorRef cfError  = NULL;
+        ABRecordRef record  = CFArrayGetValueAtIndex(peopleArrayRef, index);
+
+        ABAddressBookAddRecord(self.addressBook, record, &cfError);
+
+        if (cfError) {
+            error = (__bridge NSError *)(cfError);
+            NSLog(@"Deletion Error: %@", [error localizedDescription]);
+            return NO;
+        }
+    }
+
+    return YES;
+}
+
+- (BOOL)save {
+
+    CFErrorRef errorRef = NULL;
+    NSError *error      = nil;
+    BOOL success        = ABAddressBookSave(self.addressBook, &errorRef);
+
+    if (errorRef) {
+        error = (__bridge NSError *)(errorRef);
+    }
+    return success && !error;
 }
 
 @end
