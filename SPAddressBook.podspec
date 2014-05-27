@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.author       = { "Kevin Jenkins" => "kevinj04@gmail.com" }
   s.source       = { :git => "https://github.com/kevinj04/SPAddressBook.git",
 		                 :tag => s.version.to_s }
-  s.source_files = 'Classes/**/*.{h,m}'
+  s.source_files = 'SPAddressBook/Classes/**/*.{h,m}'
   s.ios.deployment_target = "7.0"
   s.requires_arc = true
   s.frameworks   = 'AddressBook'
