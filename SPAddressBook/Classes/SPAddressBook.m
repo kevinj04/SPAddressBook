@@ -102,8 +102,10 @@
 - (NSData *)allContactData {
 
     CFArrayRef peopleArrayRef   = ABAddressBookCopyArrayOfAllPeople(self.addressBook);
-    return (__bridge_transfer NSData *)ABPersonCreateVCardRepresentationWithPeople(peopleArrayRef);
+    NSData *data = (__bridge_transfer NSData *)ABPersonCreateVCardRepresentationWithPeople(peopleArrayRef);
+    CFRelease(peopleArrayRef);
 
+    return data;
 }
 
 - (BOOL)deleteAllContacts {
@@ -123,16 +125,19 @@
         if (cfError) {
             error = (__bridge NSError *)(cfError);
             NSLog(@"Deletion Error: %@", [error localizedDescription]);
+            CFRelease(cfError);
+            CFRelease(peopleArrayRef);
             return NO;
         }
     }
 
+    CFRelease(peopleArrayRef);
     return YES;
 }
 
 - (BOOL)loadContactsFromData:(NSData *)contactData {
 
-    CFArrayRef peopleArrayRef   = ABPersonCreatePeopleInSourceWithVCardRepresentation(NULL, (__bridge CFDataRef)contactData);
+    CFArrayRef peopleArrayRef   = ABPersonCreatePeopleInSourceWithVCardRepresentation(NULL, (__bridge  CFDataRef)contactData);
     NSUInteger peopleCount      = CFArrayGetCount(peopleArrayRef);
 
     for (NSUInteger index = 0; index < peopleCount; index++) {
@@ -146,10 +151,13 @@
         if (cfError) {
             error = (__bridge NSError *)(cfError);
             NSLog(@"Deletion Error: %@", [error localizedDescription]);
+            CFRelease(cfError);
+            CFRelease(peopleArrayRef);
             return NO;
         }
     }
 
+    CFRelease(peopleArrayRef);
     return YES;
 }
 
