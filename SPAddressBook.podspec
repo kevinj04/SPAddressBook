@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "SPAddressBook"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "iOS 7 Address Book Utility"
   s.homepage     = "https://github.com/kevinj04/SPAddressBook"
   s.license      = { :type => 'Unlicense', :file => 'LICENSE' }
